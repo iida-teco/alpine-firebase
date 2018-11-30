@@ -1,17 +1,16 @@
-FROM alpine:latest
-RUN \
-    apk update && \
-    apk add --no-cache bash python g++ make linux-headers curl yarn && \
-    touch ~/.bashrc && \
-    wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+FROM iidateco/alpine-nvm-node:v6.11.5 as node6
+FROM iidateco/alpine-nvm-node:v8.11.1 as node8
+FROM iidateco/alpine-nvm
+
+COPY --from=node6 /root/.nvm/versions/node/v6.11.5 /root/.nvm/versions/node/v6.11.5
+COPY --from=node8 /root/.nvm/versions/node/v8.11.1 /root/.nvm/versions/node/v8.11.1
 
 SHELL ["/bin/bash", "-c"]
 
 RUN \
     source ~/.bashrc && \
-    nvm install -s 6.11.5 && \
-    nvm install -s 8.11.1 && \
+    apk update && \
+    apk add --no-cache yarn && \
     nvm alias default 8.11.1 && \
     yarn global add firebase-tools && \
-    nvm cache clear && \
     yarn cache clean
