@@ -10,7 +10,7 @@ SHELL ["/bin/bash", "-c"]
 RUN \
     source ~/.bashrc && \
     apk update && \
-    apk add --no-cache yarn && \
+    apk add --no-cache yarn openjdk8 && \
     nvm alias default 8.11.1 && \
     yarn global add firebase-tools && \
     yarn cache clean
