@@ -12,5 +12,6 @@ RUN \
     apk update && \
     apk add --no-cache yarn openjdk8 && \
     nvm alias default 8.11.1 && \
+    nvm use 6.11.5 && \
     yarn global add firebase-tools && \
     yarn cache clean
