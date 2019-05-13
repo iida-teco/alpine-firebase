@@ -12,5 +12,5 @@ RUN \
     apk update && \
     apk add --no-cache yarn openjdk8 && \
     nvm alias default 8.15.0 && \
-    yarn global add firebase-tools@6.8.0 --ignore-engines && \
+    yarn global add firebase-tools@6.8.0 @google-cloud/functions-emulator --ignore-engines && \
     yarn cache clean
